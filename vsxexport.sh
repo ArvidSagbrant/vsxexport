@@ -408,7 +408,7 @@ printf "| \t\t\t| Log current routes to file\t\t|"
 echo "show bgp peers" >>$OUTPUTDIR/$HOSTNAME-VS0.clish
 echo "show ospf neighbors" >>$OUTPUTDIR/$HOSTNAME-VS0.clish
 echo "show route" >>$OUTPUTDIR/$HOSTNAME-VS0.clish
-echo "show route summary" >>$OUTPUTDIR/$HOSTNAME-VS$i.clish
+echo "show route summary" >>$OUTPUTDIR/$HOSTNAME-VS0.clish
 clish -i -f $OUTPUTDIR/$HOSTNAME-VS0.clish > $OUTPUTDIR/$HOSTNAME-VS0.tmp
 sed '/^Processing\|^Context\|^Done.\|^RTGRTG\|^CLICMD/d' $OUTPUTDIR/$HOSTNAME-VS0.tmp >$OUTPUTDIR/VS0/VS0.log
 rm $OUTPUTDIR/$HOSTNAME-VS0.clish
