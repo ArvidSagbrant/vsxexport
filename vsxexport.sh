@@ -440,8 +440,8 @@ else
     printf "| \t\t\t| vpnkern.conf NOT found\t\t|${txt_green} OK${txt_reset}\t\t|\n"
 fi
 
-if [[ -e $PPKDIR/boot/modules/simkern.conf ]]; then
-    cp --parents $PPKDIR/boot/modules/simkern.conf $OUTPUTDIR/VS0
+if [[ -e $PPKDIR/conf/simkern.conf ]]; then
+    cp --parents $PPKDIR/conf/simkern.conf $OUTPUTDIR/VS0
     printf "| \t\t\t| simkern.conf found\t\t\t|${txt_green} SAVED${txt_reset}\t\t|\n"
 else
     printf "| \t\t\t| simkern.conf NOT found\t\t|${txt_green} OK${txt_reset}\t\t|\n"
@@ -462,11 +462,12 @@ else
     printf "| \t\t\t| Default fwaffinity.conf\t\t|${txt_green} NOT SAVED${txt_reset}\t|\n"
 fi
 
-if [[ -e $FWDIR/conf/fwauthd.conf ]]; then
+FWAUTH=$(md5sum $FWDIR/conf/fwauthd.conf | awk {'print $1'})
+if [[ $FWAUTH != "d059fd3728d47ed35349ee362e09b776" ]]; then
     cp --parents $FWDIR/conf/fwauthd.conf $OUTPUTDIR/VS0
-    printf "| \t\t\t| fwauthd.conf found\t\t\t|${txt_green} SAVED${txt_reset}\t\t|\n"
+    printf "| \t\t\t| Custom fwauthd.conf\t\t\t|${txt_green} SAVED${txt_reset}\t\t|\n"
 else
-    printf "| \t\t\t| fwauthd.conf NOT found\t\t|${txt_green} OK${txt_reset}\t\t|\n"
+    printf "| \t\t\t| Default fwauthd.conf\t\t\t|${txt_green} NOT SAVED${txt_reset}\t|\n"
 fi
 
 if [[ -e $FWDIR/conf/local.arp ]]; then
@@ -499,7 +500,7 @@ else
 fi
 
 VSAFFEXCP=$(md5sum $FWDIR/conf/vsaffinity_exception.conf | awk {'print $1'})
-if [[ $VSAFFEXCP != "0a4472f1fd49086e9df58cf12fc7d9f4" ]]; then
+if [[ $VSAFFEXCP != "6d376424f5b213c794930ccd9f8428e1" ]]; then
     cp --parents $FWDIR/conf/vsaffinity_exception.conf $OUTPUTDIR/VS0
     printf "| \t\t\t| Custom vsaffinity_exception.conf\t|${txt_green} SAVED${txt_reset}\t\t|\n"
 else
@@ -521,11 +522,12 @@ else
     printf "| \t\t\t| Default trac_client_1.ttm\t\t|${txt_green} NOT SAVED${txt_reset}\t|\n"
 fi
 
-if [[ -e $FWDIR/conf/ipassignment.conf ]]; then
+IPASS=$(md5sum $FWDIR/conf/ipassignment.conf | awk {'print $1'})
+if [[ $IPASS != "4564f2ffd76c72c5503d4a74420f0ef7" ]]; then
     cp --parents $FWDIR/conf/ipassignment.conf $OUTPUTDIR/VS0
-    printf "| \t\t\t| ipassignment.conf found\t\t|${txt_green} SAVED${txt_reset}\t\t|\n"
+    printf "| \t\t\t| Custom ipassignment.conf\t\t|${txt_green} SAVED${txt_reset}\t\t|\n"
 else
-    printf "| \t\t\t| ipassignment.conf NOT found\t\t|${txt_green} OK${txt_reset}\t\t|\n"
+    printf "| \t\t\t| Default ipassignment.conf\t\t|${txt_green} NOT SAVED${txt_reset}\t|\n"
 fi
 
 
