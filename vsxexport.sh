@@ -56,6 +56,9 @@
 # 1.4    Added commands starting with "set aggregate" to export of Clish config per Virtual System
 #        Log output of cpinfo -y all
 #        Log output of netstat -rn (VS0)
+# 1.5    Forked projekt.
+#        Save fw ctl fast_accel export if enabled
+#        Update and add files with default values
 
 
 
@@ -78,10 +81,10 @@ fi
 #====================================================================================================
 HOSTNAME=$(hostname -s)
 DATE=$(date +%Y%m%d-%H%M%S)
-VERSION="1.4"
+VERSION="1.5"
 OUTPUTDIR="$HOSTNAME/$DATE"
 KERNVER=$(uname -r | awk -F. '{print $1 "." $2}')
-SCRIPT_URL="https://raw.githubusercontent.com/Rick-Hoppe/vsxexport/main/vsxexport.sh"
+SCRIPT_URL="https://raw.githubusercontent.com/ArvidSagbrant/vsxexport/main/vsxexport.sh"
 SCRIPT_LOCATION="${BASH_SOURCE[@]}"
 UPDATER="updater.sh"
 
