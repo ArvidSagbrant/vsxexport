@@ -581,6 +581,7 @@ do
     if [[ -e $OUTPUTDIR/VS$i/securexl_fast_accel.log ]] && [[ $SXL_FAST_ACC == *"disabled"* ]]; then
         check_disabled
     else
+        fw ctl fast_accel export_conf > /dev/null 2>&1
         check_enabled
     fi
 
@@ -617,6 +618,12 @@ do
         printf "| \t\t\t| cpha_bond_ls_config.conf found\t|${txt_green} SAVED${txt_reset}\t\t|\n"
     else
         printf "| \t\t\t| cpha_bond_ls_config.conf NOT found\t|${txt_green} OK${txt_reset}\t\t|\n"
+    fi
+    find $VSVARPATH -name fw_fast_accel_export_configuration.conf | cpio -pdm --quiet $OUTPUTDIR/VS$i
+    if [[ -e $VSVARPATH/fw_fast_accel_export_configuration.conf ]]; then
+        printf "| \t\t\t| fw_fast_accel_export found\t|${txt_green} SAVED${txt_reset}\t\t|\n"
+    else
+        printf "| \t\t\t| fw_fast_accel_export NOT found\t|${txt_green} OK${txt_reset}\t\t|\n"
     fi
 
     echo "+-----------------------+---------------------------------------+---------------+"
