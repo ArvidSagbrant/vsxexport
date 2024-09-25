@@ -59,6 +59,8 @@
 # 1.5    Forked projekt.
 #        Save fw ctl fast_accel export if enabled
 #        Update and add files with default values
+# 1.6    Version R80.20+ compatible
+#        Added check for IPv6 support
 
 
 
@@ -282,6 +284,23 @@ if [[ -e $OUTPUTDIR/hyperthreading.log ]] && [[ $HT == "Enabled" ]]; then
     check_enabled
 elif [[ -e $OUTPUTDIR/hyperthreading.log ]] && [[ $HT == "Disabled" ]]; then
       check_disabled
+fi
+
+printf "+-----------------------+---------------------------------------+---------------+\n"
+
+
+
+#====================================================================================================
+# Check status of IPv6 support
+#====================================================================================================
+IPV6=$(clish -c "show ipv6-state" | awk '{print $3}')
+printf "%s" "$IPV6"  >"$OUTPUTDIR/ipv6.log"
+
+printf "| IPv6\t\t\t| Status\t\t\t\t|"
+if [[ $IPV6 == "enabled" ]]; then
+    check_enabled
+else
+    check_disabled
 fi
 
 printf "+-----------------------+---------------------------------------+---------------+\n"
