@@ -107,8 +107,8 @@ if [[ ! -z "$CLCHK" ]]; then
 fi
 
 CPVER=$(clish -c "show version product" | sed 's/.*R//' | awk -F. '{print "R" $1 "." $2}')
-if [[ $CPVER != *"R8"* ]]; then
-    printf "This script is only supported on VSX with R80.10 and higher\n"
+if ! [[ $CPVER == *R8* ]] || [[ $CPVER == *R80.10* ]] ; then
+    printf "This script is only supported on VSX with R80.20 and higher\n"
     exit 1
 fi
 
@@ -450,8 +450,8 @@ else
     printf "| \t\t\t| simkern.conf NOT found\t\t|${txt_green} OK${txt_reset}\t\t|\n"
 fi
 
-if [[ -e $PPKDIR/boot/modules/sim_aff.conf ]]; then
-    cp --parents $PPKDIR/boot/modules/sim_aff.conf $OUTPUTDIR/VS0
+if [[ -e $PPKDIR/conf/simkern.conf ]]; then
+    cp --parents $PPKDIR/conf/simkern.conf $OUTPUTDIR/VS0
     printf "| \t\t\t| sim_aff.conf found\t\t\t|${txt_green} SAVED${txt_reset}\t\t|\n"
 else
     printf "| \t\t\t| sim_aff.conf NOT found\t\t|${txt_green} OK${txt_reset}\t\t|\n"
